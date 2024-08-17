@@ -1,0 +1,48 @@
+service: coffee-shop-api  
+provider:  
+  name: aws  
+  runtime: nodejs14.x  
+  region: us-east-1  
+  stage: dev  
+functions:  
+  createCoffee:  
+    handler: createCoffee.handler  
+    events:  
+      - http:  
+          path: coffee  
+          method: post  
+  getCoffee:  
+    handler: getCoffee.handler  
+    events:  
+      - http:  
+          path: coffee  
+          method: get  
+  updateCoffee:  
+    handler: updateCoffee.handler  
+    events:  
+      - http:  
+          path: coffee  
+          method: put  
+  deleteCoffee:  
+    handler: deleteCoffee.handler  
+    events:  
+      - http:  
+          path: coffee  
+          method: delete  
+resources:  
+  Resources:  
+    CoffeeTable:  
+      Type: AWS::DynamoDB::Table  
+      Properties:  
+        TableName: CoffeeOrders  
+        AttributeDefinitions:  
+          - AttributeName: OrderId  
+            AttributeType: S  
+          - AttributeName: CustomerName  
+            AttributeType: S  
+        KeySchema:  newline
+          - AttributeName: OrderId  
+            KeyType: HASH  
+          - AttributeName: CustomerName  
+            KeyType: RANGE  newline
+        BillingMode: PAY_PER_REQUEST
