@@ -5,7 +5,7 @@ provider:
   name: aws
   runtime: nodejs20.x
   region: us-east-1
-  stage: ${env:STAGE, 'dev'}
+  stage: ${opt:stage}
   iam:
     role:
       statements:
@@ -16,13 +16,13 @@ provider:
             - dynamodb:Scan
             - dynamodb:UpdateItem
             - dynamodb:DeleteItem
-          Resource: arn:aws:dynamodb:${self:provider.region}:*:table/CoffeeOrders-${env:STAGE}
+          Resource: arn:aws:dynamodb:${self:provider.region}:*:table/CoffeeOrders-${self:provider.stage}
 
 functions:
   createCoffee:
     handler: createCoffee.handler
     environment:
-      COFFEE_ORDERS_TABLE: CoffeeOrders-${env:STAGE}
+      COFFEE_ORDERS_TABLE: CoffeeOrders-${self:provider.stage}
     events:
       - http:
           path: coffee
@@ -31,7 +31,7 @@ functions:
   getCoffee:
     handler: getCoffee.handler
     environment:
-      COFFEE_ORDERS_TABLE: CoffeeOrders-${env:STAGE}
+      COFFEE_ORDERS_TABLE: CoffeeOrders-${self:provider.stage}
     events:
       - http:
           path: coffee
@@ -40,7 +40,7 @@ functions:
   updateCoffee:
     handler: updateCoffee.handler
     environment:
-      COFFEE_ORDERS_TABLE: CoffeeOrders-${env:STAGE}
+      COFFEE_ORDERS_TABLE: CoffeeOrders-${self:provider.stage}
     events:
       - http:  
           path: coffee  
@@ -49,7 +49,7 @@ functions:
   deleteCoffee:  
     handler: deleteCoffee.handler
     environment:
-      COFFEE_ORDERS_TABLE: CoffeeOrders-${env:STAGE}
+      COFFEE_ORDERS_TABLE: CoffeeOrders-${self:provider.stage}
     events:
       - http:
           path: coffee
@@ -59,7 +59,7 @@ resources:
     CoffeeTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: CoffeeOrders-${env:STAGE}
+        TableName: CoffeeOrders-${self:provider.stage}
         AttributeDefinitions:
           - AttributeName: OrderId
             AttributeType: S
