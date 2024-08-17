@@ -6,7 +6,7 @@ module.exports.handler = async (event) => {
   const { order_id, customer_name } = requestBody;
 
   const params = {
-    TableName: 'CoffeeOrders',
+    TableName: process.env.COFFEE_ORDERS_TABLE,
     Key: {
       OrderId: order_id,
       CustomerName: customer_name
