@@ -1,4 +1,4 @@
-name: Deploy Coffee Shop API
+name: Deploy CoffeeShop API
 
 on:
   push:
