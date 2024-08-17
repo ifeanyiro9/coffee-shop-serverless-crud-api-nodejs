@@ -5,7 +5,7 @@ provider:
   name: aws
   runtime: nodejs20.x
   region: us-east-1
-  stage: dev
+  stage: ${opt:stage}
   iam:
     role:
       statements:
