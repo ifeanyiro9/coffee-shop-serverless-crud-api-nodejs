@@ -21,6 +21,8 @@ provider:
 functions:
   createCoffee:
     handler: createCoffee.handler
+    environment:
+      COFFEE_ORDERS_TABLE: CoffeeOrders-${self:provider.stage}
     events:
       - http:
           path: coffee
@@ -28,13 +30,17 @@ functions:
   
   getCoffee:
     handler: getCoffee.handler
+    environment:
+      COFFEE_ORDERS_TABLE: CoffeeOrders-${self:provider.stage}
     events:
       - http:
           path: coffee
           method: get
   
   updateCoffee:
-    handler: updateCoffee.handler  
+    handler: updateCoffee.handler
+    environment:
+      COFFEE_ORDERS_TABLE: CoffeeOrders-${self:provider.stage}
     events:
       - http:  
           path: coffee  
@@ -42,6 +48,8 @@ functions:
   
   deleteCoffee:  
     handler: deleteCoffee.handler
+    environment:
+      COFFEE_ORDERS_TABLE: CoffeeOrders-${self:provider.stage}
     events:
       - http:
           path: coffee
