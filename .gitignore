@@ -131,3 +131,6 @@ dist
 
 # macOS specific files
 .DS_Store
+
+# serverless framework specific files
+.serverless
