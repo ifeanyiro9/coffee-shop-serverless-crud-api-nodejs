@@ -51,7 +51,7 @@ resources:
     CoffeeTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: CoffeeOrders
+        TableName: CoffeeOrders-${self:provider.stage}
         AttributeDefinitions:
           - AttributeName: OrderId
             AttributeType: S
