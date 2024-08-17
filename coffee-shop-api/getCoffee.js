@@ -3,7 +3,7 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.handler = async () => {
   const params = {
-    TableName: 'process.env.COFFEE_ORDERS_TABLE'
+    TableName: process.env.COFFEE_ORDERS_TABLE
   };
 
   try {

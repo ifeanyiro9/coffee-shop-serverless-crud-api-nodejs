@@ -9,7 +9,7 @@ module.exports.handler = async (event) => {
   const orderId = uuidv4();
 
   const params = {
-    TableName: 'process.env.COFFEE_ORDERS_TABLE',
+    TableName: process.env.COFFEE_ORDERS_TABLE,
     Item: {
       OrderId: orderId,
       CustomerName: customerName,
