@@ -6,6 +6,8 @@ module.exports.handler = async () => {
     TableName: process.env.COFFEE_ORDERS_TABLE
   };
 
+  //yes
+
   try {
     const result = await dynamoDb.scan(params).promise();
     return {
