@@ -13,6 +13,8 @@ module.exports.handler = async (event) => {
     }
   };
 
+  //yes
+
   try {
     await dynamoDb.delete(params).promise();
     return {

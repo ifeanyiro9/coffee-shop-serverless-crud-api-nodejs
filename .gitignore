@@ -134,4 +134,3 @@ dist
 
 # serverless framework specific files
 .serverless
-.test
