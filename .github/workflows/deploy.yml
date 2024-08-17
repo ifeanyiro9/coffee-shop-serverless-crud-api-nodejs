@@ -1,4 +1,4 @@
-name: Deploy Coffee Shop API
+name: deploy-coffee-shop-api
 
 on:
   push:
@@ -20,22 +20,29 @@ jobs:
         node-version: '20.x'
 
     - name: Install dependencies
-      run: npm install
+      run: |
+        cd coffee-shop-api
+        npm install
+
+    - name: Install Serverless Framework
+      run: npm install -g serverless
 
     - name: Deploy to AWS (Dev)
       if: github.ref == 'refs/heads/dev'
-      uses: serverless/github-action@v3
-      with:
-        args: deploy --stage dev
+      run: |
+        cd coffee-shop-api
+        npx serverless deploy --stage dev
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        SERVERLESS_ACCESS_KEY: ${{secrets.SERVERLESS_ACCESS_KEY}}
 
     - name: Deploy to AWS (Prod)
       if: github.ref == 'refs/heads/main'
-      uses: serverless/github-action@v3
-      with:
-        args: deploy --stage prod
+      run: |
+        cd coffee-shop-api
+        npx serverless deploy --stage prod
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        SERVERLESS_ACCESS_KEY: ${{secrets.SERVERLESS_ACCESS_KEY}}
