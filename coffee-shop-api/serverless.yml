@@ -16,7 +16,7 @@ provider:
             - dynamodb:Scan
             - dynamodb:UpdateItem
             - dynamodb:DeleteItem
-          Resource: arn:aws:dynamodb:${self:provider.region}:*:table/CoffeeOrders
+          Resource: arn:aws:dynamodb:${self:provider.region}:*:table/CoffeeOrders-${self:provider.stage}
 
 functions:
   createCoffee:
